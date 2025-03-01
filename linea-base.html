@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escenarios SSP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .escenario {
+            margin-bottom: 20px;
+        }
+        .escenario h2 {
+            color: #555;
+        }
+        .escenario p {
+            color: #777;
+        }
+        .opciones button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .opciones button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo"></h1>
+    <div class="escenario">
+        <h2>SSP126</h2>
+        <p>El escenario SSP126 representa un futuro con bajas emisiones y un fuerte enfoque en la sostenibilidad.</p>
+        <div class="opciones">
+            <button onclick="selectOpcion('SSP126', 'Corto Plazo')">Corto Plazo</button>
+            <button onclick="selectOpcion('SSP126', 'Mediano Plazo')">Mediano Plazo</button>
+            <button onclick="selectOpcion('SSP126', 'Largo Plazo')">Largo Plazo</button>
+        </div>
+    </div>
+    <div class="escenario">
+        <h2>SSP245</h2>
+        <p>El escenario SSP245 representa un futuro con emisiones moderadas y un enfoque equilibrado en el desarrollo.</p>
+        <div class="opciones">
+            <button onclick="selectOpcion('SSP245', 'Corto Plazo')">Corto Plazo</button>
+            <button onclick="selectOpcion('SSP245', 'Mediano Plazo')">Mediano Plazo</button>
+            <button onclick="selectOpcion('SSP245', 'Largo Plazo')">Largo Plazo</button>
+        </div>
+    </div>
+    <div class="escenario">
+        <h2>SSP585</h2>
+        <p>El escenario SSP585 representa un futuro con altas emisiones y un enfoque en el crecimiento económico rápido.</p>
+        <div class="opciones">
+            <button onclick="selectOpcion('SSP585', 'Corto Plazo')">Corto Plazo</button>
+            <button onclick="selectOpcion('SSP585', 'Mediano Plazo')">Mediano Plazo</button>
+            <button onclick="selectOpcion('SSP585', 'Largo Plazo')">Largo Plazo</button>
+        </div>
+    </div>
+    <script>
+        // Obtener el nombre del polígono de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const polygonName = decodeURIComponent(urlParams.get('polygon'));
+
+        // Mostrar el título de la página
+        document.getElementById('titulo').innerText = `${polygonName} - Escenarios SSP`;
+
+        // Función para manejar la selección de opciones
+        function selectOpcion(escenario, rangoTiempo) {
+            alert(`Has seleccionado ${escenario} - ${rangoTiempo} para ${polygonName}`);
+            // Aquí puedes redirigir a otra página o realizar otras acciones
+        }
+    </script>
+</body>
+</html>
