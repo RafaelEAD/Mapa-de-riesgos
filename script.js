@@ -18,8 +18,11 @@ fetch('data/output.geojson')
         L.geoJSON(data, {
             onEachFeature: function(feature, layer) {
                 layer.on('click', function(e) {
-                    selectedPolygon = feature.properties.name; // O feature.properties.id
-                    document.getElementById('menu').style.display = 'block';
+                    selectedPolygon = feature.properties.NOMGEO; // O feature.properties.id
+                    document.getElementById('polygonName').innerText = selectedPolygon;
+                    document.getElementById('polygonMenu').style.display = 'block';
+                    document.getElementById('menu').style.display = 'none';
+                    document.getElementById('submenu').style.display = 'none';
                 });
             }
         }).addTo(map);
@@ -44,4 +47,17 @@ function checkCombination() {
             `Polígono: ${selectedPolygon}\nEscenario: ${selectedScenario}\nRango de Tiempo: ${selectedTimeRange}`;
         document.getElementById('submenu').style.display = 'block';
     }
+}
+
+// Funciones para manejar las opciones del menú del polígono
+function showOption1() {
+    alert(`Has seleccionado la Opción 1 para ${selectedPolygon}`);
+}
+
+function showOption2() {
+    alert(`Has seleccionado la Opción 2 para ${selectedPolygon}`);
+}
+
+function showOption3() {
+    alert(`Has seleccionado la Opción 3 para ${selectedPolygon}`);
 }
