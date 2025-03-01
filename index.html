@@ -15,26 +15,16 @@
 </head>
 <body>
     <div id="map"></div>
-    <div id="menu" style="display:none;">
-        <h3>Seleccionar Escenario</h3>
-        <button onclick="selectScenario('SSP126')">SSP126</button>
-        <button onclick="selectScenario('SSP245')">SSP245</button>
-        <button onclick="selectScenario('SSP585')">SSP585</button>
-        <h3>Seleccionar Rango de Tiempo</h3>
-        <button onclick="selectTimeRange('Corto Plazo')">Corto Plazo</button>
-        <button onclick="selectTimeRange('Mediano Plazo')">Mediano Plazo</button>
-        <button onclick="selectTimeRange('Largo Plazo')">Largo Plazo</button>
-    </div>
     <div id="submenu" style="display:none;">
         <h3>Combinación Seleccionada</h3>
         <p id="combination"></p>
     </div>
-    <div id="polygonMenu" style="display:none;">
-        <h3>Opciones para <span id="polygonName"></span></h3>
-        <button onclick="showOption1()">Opción 1</button>
-        <button onclick="showOption2()">Opción 2</button>
-        <button onclick="showOption3()">Opción 3</button>
-    </div>
+        <div id="polygonMenu" style="display:none;">
+            <h3>Opciones para <span id="polygonName"></span></h3>
+            <button onclick="redirectToPage('lineaBase')">Línea Base</button>
+            <button onclick="redirectToPage('escenariosSSP')">Escenarios SSP</button>
+            <button onclick="redirectToPage('otrasOpciones')">Otras opciones</button>
+        </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Inicializar el mapa centrado en México
