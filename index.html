@@ -15,81 +15,23 @@
 </head>
 <body>
     <div id="map"></div>
+    <div id="menu" style="display:none;">
+        <h3>Seleccionar Rango de Tiempo</h3>
+        <button onclick="selectTimeRange('Corto Plazo')">Corto Plazo</button>
+        <button onclick="selectTimeRange('Mediano Plazo')">Mediano Plazo</button>
+        <button onclick="selectTimeRange('Largo Plazo')">Largo Plazo</button>
+    </div>
     <div id="submenu" style="display:none;">
         <h3>Combinación Seleccionada</h3>
         <p id="combination"></p>
     </div>
-        <div id="polygonMenu" style="display:none;">
-            <h3>Opciones para <span id="polygonName"></span></h3>
-            <button onclick="redirectToPage('lineaBase')">Línea Base</button>
-            <button onclick="redirectToPage('escenariosSSP')">Escenarios SSP</button>
-            <button onclick="redirectToPage('otrasOpciones')">Otras opciones</button>
-        </div>
+    <div id="polygonMenu" style="display:none;">
+        <h3>Opciones para <span id="polygonName"></span></h3>
+        <button onclick="redirectToPage('lineaBase')">Línea Base</button>
+        <button onclick="redirectToPage('escenariosSSP')">Escenarios SSP</button>
+        <button onclick="redirectToPage('otrasOpciones')">Otras opciones</button>
+    </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // Inicializar el mapa centrado en México
-        var map = L.map('map').setView([23.6345, -102.5528], 5); // Coordenadas de México
-
-        // Añadir una capa de tiles de Mapbox (Satélite)
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: '© Esri'
-                    }).addTo(map);
-
-        // Variables para almacenar la selección
-        var selectedPolygon = null;
-        var selectedScenario = null;
-        var selectedTimeRange = null;
-
-        // Cargar el GeoJSON
-        fetch('data/output.geojson')
-            .then(response => response.json())
-            .then(data => {
-                L.geoJSON(data, {
-                    onEachFeature: function(feature, layer) {
-                        layer.on('click', function(e) {
-                            selectedPolygon = feature.properties.NOMGEO; // O feature.properties.id
-                            document.getElementById('polygonName').innerText = selectedPolygon;
-                            document.getElementById('polygonMenu').style.display = 'block';
-                            document.getElementById('menu').style.display = 'none';
-                            document.getElementById('submenu').style.display = 'none';
-                        });
-                    }
-                }).addTo(map);
-            });
-
-        // Funciones para manejar la selección de escenario y rango de tiempo
-        function selectScenario(scenario) {
-            selectedScenario = scenario;
-            checkCombination();
-        }
-
-        function selectTimeRange(timeRange) {
-            selectedTimeRange = timeRange;
-            checkCombination();
-        }
-
-        // Función para verificar si se ha seleccionado una combinación completa
-        function checkCombination() {
-            if (selectedScenario && selectedTimeRange) {
-                // Mostrar el submenú con la combinación seleccionada
-                document.getElementById('combination').innerText = 
-                    `Polígono: ${selectedPolygon}\nEscenario: ${selectedScenario}\nRango de Tiempo: ${selectedTimeRange}`;
-                document.getElementById('submenu').style.display = 'block';
-            }
-        }
-
-        // Funciones para manejar las opciones del menú del polígono
-        function showOption1() {
-            alert(`Has seleccionado la Opción 1 para ${selectedPolygon}`);
-        }
-
-        function showOption2() {
-            alert(`Has seleccionado la Opción 2 para ${selectedPolygon}`);
-        }
-
-        function showOption3() {
-            alert(`Has seleccionado la Opción 3 para ${selectedPolygon}`);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
