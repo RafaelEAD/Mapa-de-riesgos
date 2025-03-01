@@ -19,6 +19,7 @@ fetch('data/output.geojson')
             onEachFeature: function(feature, layer) {
                 layer.on('click', function(e) {
                     selectedPolygon = feature.properties.NOMGEO; // O feature.properties.id
+                    console.log("Polígono seleccionado:", selectedPolygon); // Depuración
                     document.getElementById('polygonName').innerText = selectedPolygon;
                     document.getElementById('polygonMenu').style.display = 'block';
                     document.getElementById('menu').style.display = 'none';
@@ -28,44 +29,10 @@ fetch('data/output.geojson')
         }).addTo(map);
     });
 
-// Funciones para manejar la selección de escenario y rango de tiempo
-function selectScenario(scenario) {
-    selectedScenario = scenario;
-    checkCombination();
-}
-
-function selectTimeRange(timeRange) {
-    selectedTimeRange = timeRange;
-    checkCombination();
-}
-
-// Función para verificar si se ha seleccionado una combinación completa
-function checkCombination() {
-    if (selectedScenario && selectedTimeRange) {
-        // Mostrar el submenú con la combinación seleccionada
-        document.getElementById('combination').innerText = 
-            `Polígono: ${selectedPolygon}\nEscenario: ${selectedScenario}\nRango de Tiempo: ${selectedTimeRange}`;
-        document.getElementById('submenu').style.display = 'block';
-    }
-}
-
-// Funciones para manejar las opciones del menú del polígono
-function showOption1() {
-    alert(`Has seleccionado la Opción 1 para ${selectedPolygon}`);
-}
-
-function showOption2() {
-    alert(`Has seleccionado la Opción 2 para ${selectedPolygon}`);
-}
-
-function showOption3() {
-    alert(`Has seleccionado la Opción 3 para ${selectedPolygon}`);
-}
-
-
 // Función para redirigir a una nueva página
 function redirectToPage(opcion) {
     const polygonName = encodeURIComponent(selectedPolygon); // Codificar el nombre del polígono para la URL
+    console.log("Redirigiendo a:", opcion, "con polígono:", polygonName); // Depuración
     if (opcion === 'escenariosSSP') {
         window.location.href = `escenarios-ssp.html?polygon=${polygonName}`;
     } else if (opcion === 'lineaBase') {
