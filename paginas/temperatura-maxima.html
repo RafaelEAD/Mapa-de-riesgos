@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura Máxima</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .opcion {
+            margin-bottom: 20px;
+        }
+        .opcion h2 {
+            color: #555;
+        }
+        .opcion button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .opcion button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo"></h1>
+    <div class="opcion">
+        <h2>Variación Diaria</h2>
+        <button onclick="redirectToOpcion('variacion-diaria')">Ver gráfica</button>
+    </div>
+    <div class="opcion">
+        <h2>Comparación con la Línea Base</h2>
+        <button onclick="redirectToOpcion('comparacion-linea-base')">Ver gráfica</button>
+    </div>
+    <script>
+        // Obtener el nombre del polígono, el escenario y el plazo de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const polygonName = decodeURIComponent(urlParams.get('polygon'));
+        const escenario = decodeURIComponent(urlParams.get('escenario'));
+        const plazo = decodeURIComponent(urlParams.get('plazo'));
+
+        // Mostrar el título de la página
+        document.getElementById('titulo').innerText = `${polygonName} - ${escenario} - ${plazo} - Temperatura Máxima`;
+
+        // Función para redirigir a la opción seleccionada
+        function redirectToOpcion(opcion) {
+            window.location.href = `../graficas/${polygonName}/${plazo}/${opcion}-temp-max.html`;
+        }
+    </script>
+</body>
+</html>
