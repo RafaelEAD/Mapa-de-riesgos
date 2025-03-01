@@ -61,3 +61,16 @@ function showOption2() {
 function showOption3() {
     alert(`Has seleccionado la Opción 3 para ${selectedPolygon}`);
 }
+
+
+// Función para redirigir a una nueva página
+function redirectToPage(opcion) {
+    const polygonName = encodeURIComponent(selectedPolygon); // Codificar el nombre del polígono para la URL
+    if (opcion === 'escenariosSSP') {
+        window.location.href = `escenarios-ssp.html?polygon=${polygonName}`;
+    } else if (opcion === 'lineaBase') {
+        window.location.href = `linea-base.html?polygon=${polygonName}`;
+    } else if (opcion === 'otrasOpciones') {
+        window.location.href = `otras-opciones.html?polygon=${polygonName}`;
+    }
+}
