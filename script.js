@@ -18,9 +18,7 @@ fetch('data/output.geojson')
         L.geoJSON(data, {
             onEachFeature: function(feature, layer) {
                 layer.on('click', function(e) {
-                    // Guardar el polígono seleccionado
-                    selectedPolygon = feature.properties.name;
-                    // Mostrar el menú
+                    selectedPolygon = feature.properties.name; // O feature.properties.id
                     document.getElementById('menu').style.display = 'block';
                 });
             }
