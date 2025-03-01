@@ -1,10 +1,15 @@
 // Inicializar el mapa
-var map = L.map('map').setView([0, 0], 2);
+var map = L.map('map').setView([40.0, -3.0], 6);
 
 // Añadir una capa de tiles (por ejemplo, OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
+
+// Variables para almacenar la selección
+var selectedPolygon = null;
+var selectedScenario = null;
+var selectedTimeRange = null;
 
 // Cargar el GeoJSON
 fetch('data/output.geojson')
@@ -13,7 +18,9 @@ fetch('data/output.geojson')
         L.geoJSON(data, {
             onEachFeature: function(feature, layer) {
                 layer.on('click', function(e) {
-                    // Mostrar el menú cuando se hace clic en un polígono
+                    // Guardar el polígono seleccionado
+                    selectedPolygon = feature.properties.name;
+                    // Mostrar el menú
                     document.getElementById('menu').style.display = 'block';
                 });
             }
@@ -22,11 +29,21 @@ fetch('data/output.geojson')
 
 // Funciones para manejar la selección de escenario y rango de tiempo
 function selectScenario(scenario) {
-    alert('Escenario seleccionado: ' + scenario);
-    // Aquí puedes añadir la lógica para manejar la selección del escenario
+    selectedScenario = scenario;
+    checkCombination();
 }
 
 function selectTimeRange(timeRange) {
-    alert('Rango de tiempo seleccionado: ' + timeRange);
-    // Aquí puedes añadir la lógica para manejar la selección del rango de tiempo
+    selectedTimeRange = timeRange;
+    checkCombination();
+}
+
+// Función para verificar si se ha seleccionado una combinación completa
+function checkCombination() {
+    if (selectedScenario && selectedTimeRange) {
+        // Mostrar el submenú con la combinación seleccionada
+        document.getElementById('combination').innerText = 
+            `Polígono: ${selectedPolygon}\nEscenario: ${selectedScenario}\nRango de Tiempo: ${selectedTimeRange}`;
+        document.getElementById('submenu').style.display = 'block';
+    }
 }
