@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escenarios SSP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .variable {
+            margin-bottom: 20px;
+        }
+        .variable h2 {
+            color: #555;
+        }
+        .variable button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .variable button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo"></h1>
+    <div class="variable">
+        <h2>Temperatura Máxima</h2>
+        <button onclick="redirectToVariable('temperatura-maxima')">Ver detalles</button>
+    </div>
+    <div class="variable">
+        <h2>Temperatura Mínima</h2>
+        <button onclick="redirectToVariable('temperatura-minima')">Ver detalles</button>
+    </div>
+    <div class="variable">
+        <h2>Precipitación</h2>
+        <button onclick="redirectToVariable('precipitacion')">Ver detalles</button>
+    </div>
+    <script>
+        // Obtener el nombre del polígono, el escenario y el plazo de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const polygonName = decodeURIComponent(urlParams.get('polygon'));
+        const escenario = decodeURIComponent(urlParams.get('escenario'));
+        const plazo = decodeURIComponent(urlParams.get('plazo'));
+
+        // Mostrar el título de la página
+        document.getElementById('titulo').innerText = `${polygonName} - ${escenario} - ${plazo}`;
+
+        // Función para redirigir a la página de la variable seleccionada
+        function redirectToVariable(variable) {
+            window.location.href = `../paginas/${variable}.html?polygon=${encodeURIComponent(polygonName)}&escenario=${encodeURIComponent(escenario)}&plazo=${encodeURIComponent(plazo)}`;
+        }
+    </script>
+</body>
+</html>
